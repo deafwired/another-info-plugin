@@ -1,0 +1,17 @@
+body{
+    background-color: black;
+    color:white;
+}
+ th{
+    text-align: left;
+    border: 1px solid white
+}
+.tableTitle{
+    text-align: center;
+    color: #f7a94b;
+}
+.tables{
+    overflow-y: scroll;
+    height: 400px;
+    max-width: 50%;
+}
