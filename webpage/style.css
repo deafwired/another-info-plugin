@@ -1,5 +1,5 @@
 body{
-    background-color: black;
+    background-color: gray;
     color:white;
 }
  th{
@@ -14,4 +14,7 @@ body{
     overflow-y: scroll;
     height: 400px;
     max-width: 50%;
+}
+.container{
+    display: flex;
 }

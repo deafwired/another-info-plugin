@@ -19,7 +19,6 @@ class Plugin(BasePlugin):
         load = open(os.path.join(self.jsonPath, "currentJson.json"), "r")
         self.stats = json.load(load)
         load.close()
-        self.log(f"{threading.enumerate()}")
         self.scheduling()
 
     def formatDate(self):
@@ -59,11 +58,14 @@ class Plugin(BasePlugin):
         f.close()
 
     def disable(self):
-        self.log(f"unloading")
         self.timer.cancel()
         self.saveJson(self.jsonPath, self.stats)
 
-    def scheduling(self, interval=3600):
+    def shutdown_notification(self):
+        self.saveJson(self.jsonPath, self.stats)
+        self.timer.cancel()
+
+    def scheduling(self, interval=86400):
         self.saveJson(self.jsonPath, self.stats)
         self.timer = threading.Timer(interval, self.scheduling, args=[interval])
         self.timer.start()
