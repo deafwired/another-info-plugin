@@ -12,25 +12,87 @@
     <div class="Title"><center><img src="./N+Stats.png" alt="logo"></center></div>
     <div class="container">
       <div class="tables">
-      <table>
+      <table id = "first">
           <thead>
               <tr class="tableTitle">
                   <th onclick="sortTable(0)">File</th>
                   <th onclick="sortTable(1)>Size</th>
                 </tr>
             </thead>
-            <tbody id="files"></tbody>
+            <tbody id="files"><tr>
+    <td>Berglunds snabbkop</td>
+    <td>Sweden</td>
+  </tr>
+  <tr>
+    <td>North/South</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Koniglich Essen</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Italy</td>
+  </tr>
+  <tr>
+    <td>Paris specialites</td>
+    <td>France</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Canada</td>
+  </tr></tbody>
         </table>
     </div>
     <div class="tables">
-    <table>
+    <table id = "second">
       <thead>
         <tr class="tableTitle">
           <th onclick="sortTable(0)">User</th>
           <th onclick="sortTable(1)">Downloads</th>
         </tr>
       </thead>
-      <tbody id="users"></tbody>
+      <tbody id="users"><tr>
+    <td>Berglunds snabbkop</td>
+    <td>Sweden</td>
+  </tr>
+  <tr>
+    <td>North/South</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Koniglich Essen</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Italy</td>
+  </tr>
+  <tr>
+    <td>Paris specialites</td>
+    <td>France</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Canada</td>
+  </tr></tbody>
     </table>
 </div>
 </div>
@@ -39,7 +101,7 @@
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
+  table = document.getElementById("first");
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc"; 
@@ -92,5 +154,63 @@ function sortTable(n) {
   }
 }
 </script>
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("second");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
  </body>
 </html>
