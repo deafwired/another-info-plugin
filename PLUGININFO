@@ -1,4 +1,4 @@
 Version="0.1.0"
 Authors=['DeafWired']
 Name="anotherInfoPlugin"
-Description="I am making my own version of Nachtalb's upload_stats"
+Description="I am making my own version of Nachtalb's upload_stats\n\n /stats - opens stats"
