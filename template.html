@@ -1,88 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="./style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Stats</title>
-  </head>
 
-  <body>
-    <section id="top"></section>
-    <div class="center">
-      <img src="./N+Stats.png" class="logo" alt="logo" />
-      <p>
-        <a href="#bottom">Bottom</a>|<a href="#file">Files</a>|<a href="#user"
-          >Users</a
-        >
-      </p>
-      <p>you can sort the tables</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+  <link rel="stylesheet" href="./style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <title>Stats</title>
+</head>
+
+<body>
+  <section id="top"></section>
+  <div class="center">
+    <img src="./N+Stats.png" class="logo" alt="logo" />
+    <p>
+      <a href="#bottom">Bottom</a>|<a href="#file">Files</a>|<a href="#user">Users</a>
+    </p>
+    <p>you can sort the tables</p>
+  </div>
+  <div class="top">
+    <div style="border-right: #f7a94b 2px solid;">
+      <h2>Top Files</h2>
+      <ol id="topFiles">
+        {TOPFILES}
+      </ol>
     </div>
-    <div class="top">
-      <div style="border-right: #f7a94b 2px solid;">
-        <h2>Top Files</h2>
-        <ol id="topFiles">
-          {TOPFILES}
-        </ol>
-      </div>
-      <div>
-        <h2>Top Users</h2>
-        <ol id="topUsers">
-          {TOPUSERS}
-        </ol>
-      </div>
+    <div style="border-left: #f7a94b 2px solid;">
+      <h2>Top Users</h2>
+      <ol id="topUsers">
+        {TOPUSERS}
+      </ol>
     </div>
-    <section id="file"></section>
-    <h2>Files Stats</h2>
-    <table id="filesHead" class="center">
-      <thead>
-        <th onclick="sortTable('filesHead',0)">File</th>
-        <th onclick="sortTableByNumbers('filesHead',1)">Downloads</th>
-        <th onclick="sortTableByBytes('filesHead',2)">Total Size</th>
-        <th onclick="sortTableByBytes('filesHead',3)">File Size</th>
-        <th onclick="sortTable('filesHead',4)">Last User</th>
-      </thead>
-      <tbody id="files">
-        {FILETABLE}
-      </tbody>
-    </table>
-    <br />
-    <br />
-    <section id="user"></section>
-    <h2>Users Stats</h2>
-    <table id="usersHead" class="center">
-      <thead>
-        <th onclick="sortTable('usersHead',0)">User</th>
-        <th onclick="sortTableByNumbers('usersHead',1)">Total Files</th>
-        <th onclick="sortTableByBytes('usersHead',2)">Total Size</th>
-        <th onclick="sortTable('usersHead',3)">Last File</th>
-      </thead>
-      <tbody id="users">
-        {USERTABLE}
-      </tbody>
-    </table>
-    <br />
-    <section id="bottom"></section>
-    <footer>
-      <a href="#top">Top</a>|<a href="#file">Files</a>|<a href="#user">Users</a>
-    </footer>
-    <footer>
-      <a href="https://www.deafwired.tk">deafwired</a> | made with
-      <i>slight</i> "inspiration" from
-      <a href="https://github.com/Nachtalb">Nachtalb</a>
-    </footer>
-    <script type="text/javascript" src="./sorting.js"></script>
-    <script>
-      sortTableByBytes("filesHead", 2);
-      sortTableByNumbers("usersHead", 1);
-    </script>
-  </body>
+  </div>
+  <div class="top">
+    <div>
+      <h2>Summary</h2>
+      <dl>
+        {SUMMARY}
+      </dl>
+    </div>
+    <div>
+      <h2>Downloads per day</h2>
+      <dl class="days">
+        {WEEKDAY}
+      </dl>
+    </div>
+  </div>
+  <section id="file"></section>
+  <h2>Files Stats</h2>
+  <table id="filesHead" class="center">
+    <thead>
+      <th onclick="sortTable('filesHead',0)">File</th>
+      <th onclick="sortTableByNumbers('filesHead',1)">Downloads</th>
+      <th onclick="sortTableByBytes('filesHead',2)">Total Size</th>
+      <th onclick="sortTableByBytes('filesHead',3)">File Size</th>
+      <th onclick="sortTable('filesHead',4)">Last User</th>
+    </thead>
+    <tbody id="files">
+      {FILETABLE}
+    </tbody>
+  </table>
+  <br />
+  <br />
+  <section id="user"></section>
+  <h2>Users Stats</h2>
+  <table id="usersHead" class="center">
+    <thead>
+      <th onclick="sortTable('usersHead',0)">User</th>
+      <th onclick="sortTableByNumbers('usersHead',1)">Total Files</th>
+      <th onclick="sortTableByBytes('usersHead',2)">Total Size</th>
+      <th onclick="sortTable('usersHead',3)">Last File</th>
+    </thead>
+    <tbody id="users">
+      {USERTABLE}
+    </tbody>
+  </table>
+  <br />
+  <section id="bottom"></section>
+  <footer>
+    <a href="#top">Top</a>|<a href="#file">Files</a>|<a href="#user">Users</a>
+  </footer>
+  <footer>
+    <a href="https://www.deafwired.tk">deafwired</a> | made with
+    <i>slight</i> "inspiration" from
+    <a href="https://github.com/Nachtalb">Nachtalb</a>
+  </footer>
+  <script type="text/javascript" src="./sorting.js"></script>
+  <script>
+    sortTableByBytes("filesHead", 2);
+    sortTableByNumbers("usersHead", 1);
+  </script>
+</body>
+
 </html>

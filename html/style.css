@@ -56,4 +56,12 @@ h2 {
 .topFive{
   float: right;
   padding-right: 1%;
-} 
+}
+.days li{
+  margin: 0;
+  list-style-type: none;
+  width: var(--widthpercent);
+  background-color: #f7a94b;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}

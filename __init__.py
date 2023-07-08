@@ -25,12 +25,15 @@ class Plugin(BasePlugin):
         }
         self.__publiccommands__ = self.__privatecommands__ = [("stats", self.showStats)]
         BASE_PATH = Path(__file__).parent
+        if not os.path.exists(os.path.join(BASE_PATH, "json")):
+            os.makedir(os.path.join(BASE_PATH, "json"))
         self.BASE_PATH = BASE_PATH
         self.jsonPath = os.path.join(BASE_PATH, "json")
         with open(os.path.join(BASE_PATH, "template.html"), "r") as file:
             self.template = file.readlines()
         load = open(
-            os.path.join(self.jsonPath, "currentJson.json"), "r", encoding="utf-8"
+            os.path.join(self.jsonPath, "currentJson.json"),
+            "r",
         )
         self.stats = json.load(load)
         load.close()
