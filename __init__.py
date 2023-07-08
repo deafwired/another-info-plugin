@@ -25,10 +25,14 @@ class Plugin(BasePlugin):
         }
         self.__publiccommands__ = self.__privatecommands__ = [("stats", self.showStats)]
         BASE_PATH = Path(__file__).parent
-        if not os.path.exists(os.path.join(BASE_PATH, "json")):
-            os.makedir(os.path.join(BASE_PATH, "json"))
-        self.BASE_PATH = BASE_PATH
         self.jsonPath = os.path.join(BASE_PATH, "json")
+        if not os.path.exists(self.jsonPath):
+            os.makedirs(self.jsonPath)
+            with open(os.path.join(self.jsonPath, "currentJson.json"), "w") as file:
+                json.dump(
+                    {"files": {}, "users": {}, "day": [0, 0, 0, 0, 0, 0, 0]}, file
+                )
+        self.BASE_PATH = BASE_PATH
         with open(os.path.join(BASE_PATH, "template.html"), "r") as file:
             self.template = file.readlines()
         load = open(
@@ -77,11 +81,12 @@ class Plugin(BasePlugin):
         webbrowser.open("file://" + os.path.join(self.BASE_PATH, "html", "index.html"))
 
     def saveJson(self, json_path, stats):
-        path = json_path + "\\" + self.formatDate() + ".json"
+        path = os.path.join(json_path, self.formatDate() + ".json")
         f = open(path, "w")
         json.dump(stats, f)
         f.close()
-        f = open(json_path + "\\currentJson.json", "w")
+        currentPath = os.path.join(json_path, "currentJson.json")
+        f = open(currentPath, "w")
         json.dump(stats, f)
         f.close()
 
