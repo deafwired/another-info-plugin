@@ -4,8 +4,9 @@ from itertools import islice
 
 
 class makeHTML:
-    def __init__(self, data, template, PATH):
+    def __init__(self, data, template, PATH, limit):
         self.data = data
+        self.limit = limit
         topFiveUsers, topFiveFiles = self.topFive(self.data)
         # have to make a copy because otherwise you cant run the command more than once
         self.htmlLines = template[:]
@@ -153,6 +154,8 @@ class makeHTML:
     def addSongs(self, pos, data):
         for i in data:
             downloads = data[i]["count"]
+            if downloads < self.limit:
+                continue
             totalBytes = data[i]["total_bytes"]
             fileBytes = data[i]["bytes"]
             lastUser = data[i]["last_user"]
@@ -183,6 +186,8 @@ class makeHTML:
     def addUser(self, pos, data):
         for i in data:
             downloads = data[i]["total"]
+            if downloads < self.limit:
+                continue
             totalBytes = data[i]["total_bytes"]
             last_file = data[i]["last_file"]
             text = (

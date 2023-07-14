@@ -16,12 +16,16 @@ JSONFORMAT = "Backup_%b_%d_%Y_%H_%M"
 class Plugin(BasePlugin):
     def __init__(self):
         super().__init__()
-        self.settings = {"saveInterval": 24}
+        self.settings = {"saveInterval": 24, "limit": 5}
         self.metasettings = {
             "saveInterval": {
                 "description": "Choose how often plugin saves data (hr)",
                 "type": "integer",
-            }
+            },
+            "limit": {
+                "description": "Choose the cutoff for the number of files to show in the stats",
+                "type": "integer",
+            },
         }
         self.__publiccommands__ = self.__privatecommands__ = [("stats", self.showStats)]
         BASE_PATH = Path(__file__).parent
@@ -77,7 +81,12 @@ class Plugin(BasePlugin):
         self.stats["day"][self.getDayofWeek()] += 1
 
     def showStats(self, *args):
-        makeHTML(self.stats, self.template, os.path.join(self.BASE_PATH, "html"))
+        makeHTML(
+            self.stats,
+            self.template,
+            os.path.join(self.BASE_PATH, "html"),
+            self.settings["limit"],
+        )
         webbrowser.open("file://" + os.path.join(self.BASE_PATH, "html", "index.html"))
 
     def saveJson(self, json_path, stats):
